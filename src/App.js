@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { css, Global } from "@emotion/react";
+import Breeds from "./pages/Breeds";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Detail from "./pages/Detail";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Global
+        styles={css`
+          @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Noto+Serif&display=swap");
+          * {
+            font-family: "Noto Serif", cursive;
+          }
+          h1 {
+            font-family: "Indie Flower", cursive;
+          }
+          a {
+            text-decoration: none;
+          }
+        `}
+      />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Breeds} />
+          <Route path="/breeds/:breed/:image" component={Detail} />
+          <Route component={NotFound} />
+        </Switch>
+      </Router>
     </div>
   );
 }
